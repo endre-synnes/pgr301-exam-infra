@@ -1,5 +1,5 @@
 provider "statuscake" {
-  username = "glennbechgmailcom"
+  username = "endremikalhotmailcom"
 }
 
 resource "statuscake_test" "production" {
