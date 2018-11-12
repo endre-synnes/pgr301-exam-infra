@@ -5,3 +5,4 @@ credentials_example.yml
 credentials.yml
 .terraform
 
+.idea/
