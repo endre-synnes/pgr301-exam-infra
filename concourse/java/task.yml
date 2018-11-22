@@ -14,7 +14,7 @@ outputs:
   - name: jar-file
 
 caches:
-- path: ./m2
+- path: .m2/
 
 run:
   path: exam-infra-master/concourse/java/task.sh

@@ -23,7 +23,6 @@ jobs:
   plan:
   - aggregate:
     - get: exam-infra-master
-      trigger: true
   - task: apply
     file: exam-infra-master/concourse/terraform/task.yml
     input_mapping: {source: exam-infra-master}
