@@ -1,14 +1,23 @@
 jobs:
 # Replace params / app_name with your heroku app name
+
+- name: build
+  plan:
+    - aggregate:
+      - get: pokemon-app
+      - get: exam-infra-master
+        trigger: true
+    - task: mvn_build
+      file: exam-infra-master/concourse/java/task.yml
+      input_mapping: {source: pokemon-app}
+
 - name: deploy-app
   plan:
   - aggregate:
     - get: pokemon-app
     - get: exam-infra-master
+      passed: [build]
       trigger: true
-  - task: mvn_build
-    file: exam-infra-master/concourse/java/task.yml
-    input_mapping: {source: pokemon-app}
 
   - task: push_to_heroku
     file: exam-infra-master/concourse/heroku/push_master_to_heroku.yml
