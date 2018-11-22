@@ -13,7 +13,7 @@ echo -e "${GREEN}${CHECK} Maven install${NC}"
 
 
 export ROOT_FOLDER=$( pwd )
-M2_HOME=${HOME}/.m2
+M2_HOME="${HOME}/.m2"
 mkdir -p ${M2_HOME}
 
 M2_LOCAL_REPO="${ROOT_FOLDER}/.m2"
