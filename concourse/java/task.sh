@@ -30,5 +30,6 @@ EOF
 mvn -f source/pom.xml install
 echo -e "${GREEN}${CHECK} Maven install${NC}"
 
-mv source/pokemon.jar ./jar-file
+mv source/target/pokemon.jar ./jar-file
 mv source/Dockerfile ./jar-file
+mv source/pokemons.json ./jar-file
