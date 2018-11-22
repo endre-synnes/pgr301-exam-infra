@@ -7,18 +7,12 @@ export NC='\033[0m'
 export CHECK="√"
 export M2_LOCAL_REPO=".m2"
 
-mvn -f source/pom.xml install 
-echo -e "${GREEN}${CHECK} Maven install${NC}"
-
-
 
 export ROOT_FOLDER=$( pwd )
-M2_HOME="${HOME}/.m2"
+M2_HOME="${ROOT_FOLDER}/.m2"
 mkdir -p ${M2_HOME}
 
-M2_LOCAL_REPO="${ROOT_FOLDER}/.m2"
-
-mkdir -p "${M2_LOCAL_REPO}/repository"
+mkdir -p "${M2_HOME}/repository"
 
 cat > ${M2_HOME}/settings.xml <<EOF
 
@@ -26,7 +20,7 @@ cat > ${M2_HOME}/settings.xml <<EOF
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
                           https://maven.apache.org/xsd/settings-1.0.0.xsd">
-      <localRepository>${M2_LOCAL_REPO}/repository</localRepository>
+      <localRepository>${M2_HOME}/repository</localRepository>
 </settings>
 
 EOF
@@ -36,3 +30,8 @@ M2_CACHE="${ROOT_FOLDER}/maven"
 echo "Generating symbolic links for caches"
 
 [[ -d "${M2_CACHE}" && ! -d "${M2_HOME}" ]] && ln -s "${M2_CACHE}" "${M2_HOME}"
+
+
+mvn -f source/pom.xml install
+echo -e "${GREEN}${CHECK} Maven install${NC}"
+
