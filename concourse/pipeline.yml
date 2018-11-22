@@ -5,6 +5,7 @@ jobs:
   - aggregate:
     - get: pokemon-app
     - get: exam-infra-master
+      trigger: true
   - task: mvn_build
     file: exam-infra-master/concourse/java/task.yml
     input_mapping: {source: pokemon-app}
@@ -22,6 +23,7 @@ jobs:
   plan:
   - aggregate:
     - get: exam-infra-master
+      trigger: true
   - task: apply
     file: exam-infra-master/concourse/terraform/task.yml
     input_mapping: {source: exam-infra-master}
