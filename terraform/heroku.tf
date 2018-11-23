@@ -2,6 +2,9 @@
 resource "heroku_app" "ci" {
   name   = "${var.app_prefix}-app-ci"
   region = "eu"
+  config_vars = {
+    JAVA_TOOL_OPTION = "-Xmx300m"
+  }
 }
 
 
