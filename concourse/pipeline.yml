@@ -56,7 +56,7 @@ jobs:
       passed: [infra]
       trigger: true
   - task: push-config
-    file: terraform-git-master/concourse/heroku/task.yml
+    file: exam-infra-master/concourse/heroku/task.yml
     input_mapping: {source: exam-infra-master}
     params:
       app_name: ((heroku_app_name))
