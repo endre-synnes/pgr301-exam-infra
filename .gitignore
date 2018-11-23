@@ -1,10 +1,10 @@
 deploy_infra
 deploy_infra.pub
 credentials.yaml
-credentials_example.yml
 credentials.yml
 .terraform
 
 .idea/
 
 *.DS_Store
+*.iml
