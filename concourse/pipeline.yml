@@ -25,7 +25,7 @@ jobs:
   - task: push_to_heroku
     file: exam-infra-master/concourse/docker/docker_deploy.yml
     params:
-      app_name: ((heroku_app_name))
+      app_name: ((heroku_app_name))-app-ci
       heroku_email: ((heroku_email))
       heroku_api_token: ((heroku_api_key))
 
@@ -48,6 +48,23 @@ jobs:
     params:
       repository: with-state
       rebase: true
+
+- name: deploy-heroku-config-vars
+  plan:
+  - aggregate:
+    - get: exam-infra-master
+      passed: [infra]
+      trigger: true
+  - task: push-config
+    file: terraform-git-master/concourse/heroku/task.yml
+    input_mapping: {source: exam-infra-master}
+    params:
+      app_name: ((heroku_app_name))
+      heroku_email: ((heroku_email))
+      heroku_api_token: ((heroku_api_key))
+      heroku_graphite_ci: ((heroku_graphite_ci))
+      heroku_graphite_staging: ((heroku_graphite_staging))
+      heroku_graphite_production: ((heroku_graphite_production))
 
 resources:
 

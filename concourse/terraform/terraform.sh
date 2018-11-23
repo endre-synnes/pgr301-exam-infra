@@ -68,6 +68,7 @@ terraform_apply() {
     terraform_init
     terraform apply -refresh=true -auto-approve=true -lock-timeout=$lock_timeout
     # Fails if there is no output (which is not really a failure)
+    mkdir -p ${DIR}/terraform
     set +e
     terraform output -json > ${DIR}/terraform/output.json
     set -e
@@ -75,7 +76,7 @@ terraform_apply() {
     git config --global user.name "concourse-ci"
     git add terraform.tfstate
     git status
-    git commit -m"concourse CI@Localhost"
+    git diff --quiet && git diff --staged --quiet || git commit -m "concourse-ci@localhost"
     git clone "${DIR}/source" "${DIR}/with-state"
 }
 
